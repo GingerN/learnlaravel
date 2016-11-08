@@ -10,6 +10,8 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use Carbon\Carbon;
+Carbon::setLocale('ru');
 
 Route::get('/', function () {
     return view('welcome');
