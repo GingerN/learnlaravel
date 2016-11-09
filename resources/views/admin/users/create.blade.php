@@ -4,11 +4,11 @@
 
 	<h1>Create Users</h1>
 
-	{!! Form::open(['url' => 'admin/users', 'action' => 'AdminUsersController@store', 'file' => true]) !!}
+	{!! Form::open(['url' => 'admin/users', 'action' => 'AdminUsersController@store', 'files' => true]) !!}
 
 		<div class="form-group">
-			{!! Form::label('file', 'Avatar:') !!}
-			{!! Form::file('file', null, ['class' => 'form-control']) !!}
+			{!! Form::label('photo_id', 'Avatar:') !!}
+			{!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
 		</div>
 
 		<div class="form-group">
