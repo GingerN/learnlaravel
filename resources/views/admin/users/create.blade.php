@@ -4,7 +4,7 @@
 
 	<h1>Create Users</h1>
 
-	{!! Form::open(['url' => 'admin/users', 'action' => 'AdminUsersController@store', 'files' => true]) !!}
+	{!! Form::open(['url' => 'admin/users', 'method'=>'post', 'action' => 'AdminUsersController@store', 'files' => true]) !!}
 
 		<div class="form-group">
 			{!! Form::label('photo_id', 'Avatar:') !!}
