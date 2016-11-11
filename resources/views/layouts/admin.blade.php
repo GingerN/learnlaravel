@@ -43,6 +43,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="{{url('/admin')}}">Admin</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -53,16 +54,26 @@
 
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
+                <ul class="dropdown-menu" role="menu">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+                    <li>
+                        <a href="{{ url('/logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -138,11 +149,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{route('posts.index')}}">All Posts</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{route('posts.create')}}">Create Post</a>
                             </li>
 
                         </ul>

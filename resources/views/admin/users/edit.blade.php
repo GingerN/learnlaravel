@@ -17,7 +17,7 @@
 
 		<div class="form-group">
 			{!! Form::label('photo_id', 'Avatar:') !!}
-			{!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
+			{!! Form::file('photo_id') !!}
 		</div>
 
 		<div class="form-group">
@@ -46,9 +46,16 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::button('Edit User', ['type'=>'submit', 'class'=>'btn btn-primary']) !!}
+			{!! Form::button('Edit User', ['type'=>'submit', 'class'=>'btn btn-primary col-sm-6']) !!}
 		</div>
 
+	{!! Form::close() !!}
+
+
+	{!! Form::open(['method'=>'DELETE', 'action' => ['AdminUsersController@destroy', $user->id]]) !!}
+		<div class="form-group">
+			{!! Form::button('Delete User', ['type'=>'submit', 'class'=>'btn btn-danger col-sm-6']) !!}
+		</div>
 	{!! Form::close() !!}
 
 	</div>

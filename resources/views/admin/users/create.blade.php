@@ -8,7 +8,7 @@
 
 		<div class="form-group">
 			{!! Form::label('photo_id', 'Avatar:') !!}
-			{!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
+			{!! Form::file('photo_id') !!}
 		</div>
 
 		<div class="form-group">

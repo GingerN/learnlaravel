@@ -8,6 +8,7 @@ use App\Http\Requests\UsersEditRequest;
 use App\User;
 use App\Role;
 use App\Photo;
+use Session;
 
 class AdminUsersController extends Controller
 {
@@ -48,6 +49,7 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+        //?
         if(trim($request->password) == '') {
             $input = $request->except('password');
         } else {
@@ -58,7 +60,7 @@ class AdminUsersController extends Controller
         if($file = $request->file('photo_id')) {
             // $trans = \Transliterator::create('Cyrillic-Latin');
             // $trans->transliterate(str_replace(' ', '_', $file->getClientOriginalName()));
-            $trans = transliterator_transliterate('Cyrillic-Latin', str_replace(' ', '_', $file->getClientOriginalName()));
+            $trans = transliterator_transliterate('Cyrillic-Latin', str_replace(' ', '-', $file->getClientOriginalName()));
             $name = time().$trans;
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
@@ -115,7 +117,7 @@ class AdminUsersController extends Controller
         if($file = $request->file('photo_id')) {
             //$trans = \Transliterator::create('Cyrillic-Latin');
             //$trans->transliterate(str_replace(' ', '_', $file->getClientOriginalName()));
-            $trans = transliterator_transliterate('Cyrillic-Latin', str_replace(' ', '_', $file->getClientOriginalName()));
+            $trans = transliterator_transliterate('Cyrillic-Latin', str_replace(' ', '-', $file->getClientOriginalName()));
             $name = time().$trans;
             $file->move('images', $name);
             $photo = Photo::create(['file'=>$name]);
@@ -135,6 +137,13 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        unlink(public_path() . $user->photo->file);
+
+        $user->delete();
+
+        Session::flash('deleted_user', 'The user has been deleted');
+
+        return redirect('/admin/users');
     }
 }
