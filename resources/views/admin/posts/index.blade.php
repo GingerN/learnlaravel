@@ -27,7 +27,7 @@
 	          <td><a href="{{route('posts.edit', $post->id)}}">edit</a><br />{{$post->title}}</td>
 	          <td>{{$post->body}}</td>
 	          <td>{{$post->user->name}}</td>
-	          <td>{{$post->category_id}}</td>
+	          <td>{{$post->category_id ? $post->category->name : 'No Category' }}</td>
 	          <td>{{$post->created_at->diffForHumans()}}</td>
 	          <td>{{$post->updated_at->diffForHumans()}}</td>
 
